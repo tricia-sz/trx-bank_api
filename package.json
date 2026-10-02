@@ -7,15 +7,21 @@
     "dev": "tsc && node --watch dist/server.js",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@jest/globals": "^30.5.2",
+    "@swc/core": "^1.16.13",
+    "@swc/jest": "^0.2.39",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/node": "^26.6.4",
+    "jest": "^30.5.2",
     "typescript": "^7.0.2"
   },
   "dependencies": {
