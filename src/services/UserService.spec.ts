@@ -1,13 +1,13 @@
-
-import UseService = require("./UseService")
+import { UserService, type User } from './UseService.js'
 
 
 describe('UserService', () => {
-  const userService =  new UseService.UserService()
+ const mockDb: User[] = []
+ const useService = new UserService(mockDb)
 
   it('Deve adicionar um novo usuário', () => {
     const mockConsole = jest.spyOn(global.console, 'log')
-    userService.createUser('Tricia', 'tricia@teste.com');
-    expect(mockConsole).toHaveBeenCalled()
+    useService.createUser('Tricia', 'tricia@teste.com');
+    expect(mockConsole).toHaveBeenCalledWith('DB atualizado', mockDb)
   })
 })
