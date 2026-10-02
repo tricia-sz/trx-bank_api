@@ -4,16 +4,30 @@ import { UserService } from "../services/UseService.js";
 const userService = new UserService();
 
 export class UserController {
+  userService: UserService
+
+  constructor(
+    userService = new UserService()
+  ){
+      this.userService = userService
+  }
+
+
+
   createUser = (request: Request, response: Response) => {
-    const { name, email } = request.body;
+    const user = request.body
 
-    const user = userService.createUser(name, email);
+    if(!user.name) {
+      return response.status(400).json({message: "Usuario nao encontrado"})
+    }
 
-    return response.status(201).json(user);
+    this.userService.createUser(user.name, user.email) 
+      return response.status(201).json({message: "Usuario criado com sucesso"})
+    
   };
 
   getAllUsers = (_request: Request, response: Response) => {
-    const users = userService.getAllUsers();
+    const users = this.userService.getAllUsers();
 
     return response.status(200).json(users);
   };
